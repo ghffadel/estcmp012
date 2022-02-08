@@ -141,3 +141,24 @@ void heap_sort (int vet[], int n) {
     heapify(vet, i, 0);
   }
 }
+
+void counting_sort (int vet[], int n) {
+  int i, j = 0, max = INT_MIN, min = INT_MAX;
+
+  for (int i = 0; i < n; i++) {
+    if (vet[i] > max) max = vet[i];
+    if (vet[i] < min) min = vet[i];
+  }
+
+  int range = max - min + 1, *count = (int *) malloc(range * sizeof(int));
+
+  for (i = 0; i < range; i++) count[i] = 0;
+  for (i = 0; i < n; i++) count[vet[i] - min]++;
+
+  for (i = min; i <= max; i++) {
+    while (count[i - min]) {
+      vet[j++] = i;
+      count[i - min]--;
+    }
+  }
+}
