@@ -120,3 +120,24 @@ void comb_sort (int vet[], int n) {
     }
   }
 }
+
+void heapify (int vet[], int n, int i) {
+  int largest = i, left = 2 * i + 1, right = 2 * i + 2;
+
+  if (left < n && vet[left] > vet[largest]) largest = left;
+  if (right < n && vet[right] > vet[largest]) largest = right;
+
+  if (largest != i) {
+    swap(&vet[i], &vet[largest]);
+    heapify(vet, n, largest);
+  }
+}
+
+void heap_sort (int vet[], int n) {
+  for (int i = n / 2 - 1; i >= 0; i--) heapify(vet, n, i);
+
+  for (int i = n - 1; i > 0; i--) {
+    swap(&vet[0], &vet[i]);
+    heapify(vet, i, 0);
+  }
+}
