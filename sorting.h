@@ -76,3 +76,29 @@ void quick_sort (int vet[], int left, int right) {
     quick_sort(vet, p + 1, right);
   }
 }
+
+void cocktail_sort (int vet[], int n) {
+  int sorted = 0;
+
+  while (!sorted) {
+    sorted = 1;
+
+    for (int i = 0; i < n - 1; i++) {
+      if (vet[i] > vet[i + 1]) {
+        swap(&vet[i], &vet[i + 1]);
+        sorted = 0;
+      }
+    }
+
+    if (sorted) break;
+
+    sorted = 1;
+
+    for (int i = n - 1; i > 0; i--) {
+      if (vet[i] < vet[i - 1]) {
+        swap(&vet[i], &vet[i - 1]);
+        sorted = 0;
+      }
+    }
+  }
+}
