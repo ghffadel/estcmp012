@@ -102,3 +102,21 @@ void cocktail_sort (int vet[], int n) {
     }
   }
 }
+
+void comb_sort (int vet[], int n) {
+  float shrink = 1.3;
+  int gap = n, sorted = 0;
+
+  while (!sorted) {
+    gap /= shrink;
+
+    if (gap <= 1) gap = sorted = 1;
+
+    for (int i = 0; i < n - gap; i++) {
+      if (vet[i] > vet[i + gap]) {
+        swap(&vet[i], &vet[i + gap]);
+        sorted = 0;
+      }
+    }
+  }
+}
