@@ -162,3 +162,29 @@ void counting_sort (int vet[], int n) {
     }
   }
 }
+
+void merge (int vet[], int n, int left, int mid, int right) {
+  int aux[n];
+
+  for (int i = left; i <= right; i++) aux[i] = vet[i];
+
+  int i = left, j = mid + 1, k = left;
+
+  while (i <= mid && j <= right) {
+    if (aux[i] < aux[j]) vet[k++] = aux[i++];
+    else vet[k++] = aux[j++];
+  }
+
+  while (i <= mid) vet[k++] = aux[i++];
+  while (j <= right) vet[k++] = aux[j++];
+}
+
+void merge_sort (int vet[], int n, int left, int right) {
+  if (left >= right) return;
+
+  int mid = (left + right) / 2;
+
+  merge_sort(vet, n, left, mid);
+  merge_sort(vet, n, mid + 1, right);
+  merge(vet, n, left, mid, right);
+}
